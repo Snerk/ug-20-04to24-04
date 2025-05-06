@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+echo "[*] Step 1: Cleaning and preparing system on 20.04..."
+sudo apt update
+sudo apt full-upgrade -y
+sudo apt autoremove -y
+sudo apt install update-manager-core -y
+
+echo "[*] Step 2: Confirming CLI-only setup..."
+sudo sed -i 's/^Prompt=.*/Prompt=lts/' /etc/update-manager/release-upgrades
+
+echo "[*] Step 3: Upgrading to Ubuntu 22.04 LTS..."
+sudo do-release-upgrade
+
+echo "[✓] Upgrade to 22.04 complete. Reboot and run the next script."
