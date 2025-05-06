@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -e
+
+echo "[*] Purging desktop environments and GUI components..."
+
+# Display managers
+sudo apt purge -y gdm3 lightdm sddm xdm
+
+# GNOME
+sudo apt purge -y ubuntu-desktop gnome-shell gnome-session gnome-control-center gnome-terminal nautilus
+
+# KDE / Plasma
+sudo apt purge -y kde-plasma-desktop plasma-desktop kde-standard kwin*
+
+# XFCE
+sudo apt purge -y xubuntu-desktop xfce4 xfce4-*
+
+# LXDE
+sudo apt purge -y lxde lxde-core lxde-common
+
+# MATE
+sudo apt purge -y ubuntu-mate-core ubuntu-mate-desktop mate-desktop-environment*
+
+# Cinnamon
+sudo apt purge -y cinnamon-desktop-environment cinnamon
+
+# Unity (old)
+sudo apt purge -y ubuntu-unity-desktop unity
+
+# Misc GUI components and helpers
+sudo apt purge -y xorg xserver-xorg* xwayland wayland* \
+    light-locker xscreensaver network-manager-gnome \
+    gnome-software update-manager update-notifier \
+    gnome-keyring seahorse snapd apport apport-gtk \
+    gvfs gvfs-* pulseaudio* cups* bluez* modemmanager
+
+# Clean up
+sudo apt autoremove --purge -y
+sudo apt clean
+
+echo "[✓] GUI successfully purged. You're now in CLI-only territory."
